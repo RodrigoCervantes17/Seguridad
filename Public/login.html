@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" id="contraseña" required>
+            </div>
+            <button type="submit">Ingresar</button>
+        </form>
+        <p>¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const contraseña = document.getElementById('contraseña').value;
+
+            const response = await fetch('/auth/login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ nombre, contraseña })
+            });
+
+            if (!response.ok) {
+                const error = await response.text();
+                return alert(error);
+            }
+
+            const data = await response.json();
+            localStorage.setItem('user', JSON.stringify(data.user));
+            
+            if (data.user.estado_admin) window.location.href = 'welcome-admin.html';
+            else window.location.href = 'welcome-user.html';
+        });
+    </script>
+</body>
+</html>

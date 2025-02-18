@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Usuarios Registrados</h1>
+        <table id="tablaUsuarios">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <a href="login.html">Cerrar sesión</a>
+    </div>
+
+    <script>
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user || !user.estado_admin) window.location.href = 'login.html';
+
+        async function cargarUsuarios() {
+            const response = await fetch('/auth/users');
+            const usuarios = await response.json();
+            
+            const tbody = document.querySelector('#tablaUsuarios tbody');
+            tbody.innerHTML = '';
+            
+            usuarios.forEach(user => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.nombre}</td>
+                    <td>${user.estado_activo ? 'Activo' : 'Inactivo'}</td>
+                    <td>
+                        <button onclick="cambiarEstado(${user.id}, ${!user.estado_activo})">
+                            ${user.estado_activo ? 'Desactivar' : 'Activar'}
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(fila);
+            });
+        }
+
+        async function cambiarEstado(id, nuevoEstado) {
+            await fetch(`/auth/users/${id}/status`, {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ estado_activo: nuevoEstado })
+            });
+            cargarUsuarios();
+        }
+
+        cargarUsuarios();
+    </script>
+</body>
+</html>

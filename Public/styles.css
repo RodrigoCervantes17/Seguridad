@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container, .register-container, .welcome-container, .admin-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem;
+    background: #1877f2;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #166fe5;
+}
+
+#tablaUsuarios {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+#tablaUsuarios td, #tablaUsuarios th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
