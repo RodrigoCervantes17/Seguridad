@@ -6,8 +6,11 @@ El primer paso es har tu npm i sobre tu carpeta principal
 Despues creas tu archivo .env que va a contener los datos para acceder a tu base de datos este es un ejemplo de este
 
 > DB_HOST=localhost
+
 > DB_USER=tuUsuario
+
 > DB_PASSWORD=tuContrasena
+
 > DB_NAME=login
 
 Para la base de datos puedes cambiar los nombre de esta y de la tabla asi como los campos, el ejemplo usado en este repo es algo como esto 
@@ -32,6 +35,8 @@ fecha_registro
 ```
 Una vez todo configurado tendrias que realizar un 
 > cd src
+
 seguido de un
+
 > npm start
 y ya tendrias tu servidor corriendo localmente.
