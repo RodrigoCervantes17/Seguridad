@@ -39,4 +39,5 @@ Una vez todo configurado tendrias que realizar un
 seguido de un
 
 > npm start
+
 y ya tendrias tu servidor corriendo localmente.
